@@ -1,0 +1,12 @@
+include_directories(maskgen)
+set(PROGS ising percolation)
+foreach(name ${PROGS})
+  set(target_name example_${name})
+  add_executable(${target_name} ${name}.cpp)
+  set_target_properties(${target_name} PROPERTIES OUTPUT_NAME ${name})
+endforeach(name)
+
+file(GLOB PY_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*.py")
+foreach(name ${PY_SOURCES})
+  configure_file(${name} ${name} COPYONLY) 
+endforeach(name ${PY_SOURCES})
